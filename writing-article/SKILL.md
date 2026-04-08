@@ -1,295 +1,211 @@
 ---
 name: writing-article
-description: >-
-  按主题与类型、平台组合加载约束规则、内容原则、分类与平台参考及写作技巧库，产出高质量文章与文案。触发词：写作、写文章、文案、润色、扩写、改写、缩写、标题、大纲、金句、公众号、知乎、小红书、
-  抖音、B站、视频脚本、口播、种草、带货、转化文案、着陆页、B2B、白皮书、案例、邮件通讯、Newsletter、朋友圈、推文、X、LinkedIn、Medium、掘金、即刻、播客稿、品牌故事。适用于需指定或隐含类型与平台的写作任务。
+description: |
+  AI 辅助写作技能——从灵感到终稿的全流程代写。支持深度长文、科普教程、散文、短篇小说、长篇小说等多种题材。
+  采用 AITL（Algorithm in the Loop）模式：人类主导决策方向，AI 进入人类写作流程提供全程辅助。
+  每个阶段通过启发式提问深度挖掘用户思想，AI 全程代写，用户负责审核与方向把控。
+  当用户提到以下情况时使用本技能：写文章、写一篇、帮我写、我有个灵感、我想写点东西、有个脑洞、有个想法想写出来、
+  博客、散文、小说、科普、深度文章、Newsletter、教程、长文、短篇、随笔、创作、写作。
+  即使用户只是模糊地表达了写作意图（比如"我有个想法"或"帮我把这个写出来"），也应该触发本技能。
 ---
 
-# Writing Article - 写作技能
+# Writing Article —— AI 辅助写作全流程
 
-按主题与类型、平台组合加载约束规则、内容原则、分类与平台参考及写作技巧库，产出高质量文章与文案。
+## 运作模式
 
-## 定位
+这个技能采用 **AITL（Algorithm in the Loop）** 模式：
 
-接受写作任务，组合加载规则文件，输出高质量内容。
+- **人类主导**：你决定写什么、写给谁、怎么定调、哪里需要改
+- **AI 辅助**：我负责提问挖掘你的想法、生成内容、按你的反馈修改
 
----
-
-## 输入参数
-
-| 参数 | 必填 | 说明 |
-|------|:----:|------|
-| `主题` | ✅ | 写作主题或任务描述 |
-| `类型` | ✅ | 见下方[技巧组合指南](#技巧组合指南)，默认 `general` |
-| `平台` | ⬜ | 见下方平台列表，默认 `general` |
-| `素材` | ⬜ | 参考素材，可多篇，AI 杂糅融合，不得原文照搬 |
-| `字数` | ⬜ | 未指定则采用平台推荐字数 |
-| `排版` | ⬜ | 未指定则采用平台推荐排版 |
+每个阶段我会先通过提问把你脑子里的东西挖出来，然后生成内容，你确认了才往下走。
 
 ---
 
-## 文件加载顺序
+## 工作流总览
 
 ```
-1. references/harnesses.md     ← 必读，最高优先级，先建立红线
-2. references/rules.md         ← 必读，内容基本原则
-3. references/categories/{type}.md
-4. references/platforms/{platform}.md
-5. references/arts/{art}.md    ← 可多个，按[技巧组合指南]推荐加载
+Phase 1 · 灵感接收  ─→  识别题材，启发式提问（1-10轮）
+         ↓
+Phase 2 · 大纲生成  ─→  补全信息，生成大纲，用户确认
+         ↓
+Phase 3 · 细纲确认  ─→  展开每节细纲，确认论点和顺序
+         ↓
+Phase 4 · 初稿生成  ─→  逐节展开写作，用户反馈修改
+         ↓
+Phase 5 · 终稿输出  ─→  整合反馈，输出最终版本
 ```
 
-**组装公式**：输出 = 类型 ＋ 平台 ＋ 技巧 ＋ 内容规则 ＋ 约束规则
+每个阶段之间至少 1 轮、最多 10 轮启发式提问。信息够了就往下走，不凑数。
 
 ---
 
-## Markdown 使用规则
+## 启发式提问规则（所有阶段通用）
 
-| 内容场景 | 排版方式 |
-|---------|---------|
-| 通用文章、公众号图文 | ✅ 使用 Markdown |
-| 朋友圈、纯社交媒体文案 | ❌ 纯文本，无任何 Markdown 标记 |
+这些规则贯穿整个写作流程，每一轮提问都必须遵守：
 
-> 判断依据：类型为 `social` 且平台为 `wechat`（朋友圈场景）时输出纯文本。
-> 其他所有场景默认使用 Markdown。
+1. **每次只问一个问题。** 一次抛两三个问题会让人不知道先答哪个。一个一个来。
 
----
+2. **每个问题必须基于三样东西：** 当前阶段的目标 + 写作主题 + 之前所有问答的内容。不要问已经聊过的东西，也不要问跟主题无关的东西。
 
-## 技巧组合指南
+3. **不跑题。** 好奇心再强也不要把话题引到跟文章无关的方向。
 
-根据你的写作目标，选择合适的类型、平台和技巧组合：
+4. **提问风格根据上下文动态选择：**
+   - **苏格拉底式**：追问深层动机和假设——"你说的X，背后真正让你在意的是什么？"
+   - **记者式**：挖掘具体事实和细节——"这件事具体发生在什么情境下？"
+   - **教练式**：聚焦目标和读者价值——"读完这篇，你希望读者带走什么？"
 
-### 📄 深度长文 / 观点文章
+5. **每轮标注进度：** 格式是 `[第 N 问 · 阶段名]`，让用户知道当前在哪里。
 
-| 场景 | 类型 | 推荐平台 | 核心技巧组合 | 辅助技巧 |
-|------|------|----------|--------------|----------|
-| 行业洞察 / 商业分析 | general | 公众号 / 即刻 | APAG + 叙事弧 | SCQA + Bucket Brigades |
-| 知识干货 / 深度教程 | general | 公众号 / 掘金 | SCQA + 5W1H | FAB + 公众号结构 |
-| 个人成长 / 思考随笔 | general | Medium / 即刻 | APAG + 故事弧 | Hook + 金句公式 |
-| 知乎深度回答 | general | 知乎 | SCQA + 叙事弧 | Bucket Brigades |
-| 时事评论 / 热点分析 | general | X(Twitter)长推 | SCQA + 4U标题 | Hook |
-
-### 📱 短视频 / 视频脚本
-
-| 场景 | 类型 | 推荐平台 | 核心技巧组合 | 辅助技巧 |
-|------|------|----------|--------------|----------|
-| 抖音爆款视频 | video-script | 抖音 | 抖音三段式 + Hook + AIDA | 情绪价值 |
-| B站知识视频 | video-script | B站 | SCQA + 故事弧 + 5W1H | Hook |
-| YouTube Shorts | video-script | YouTube Shorts | 黄金3秒 + AIDA | Bucket Brigades |
-| 产品种草视频 | video-script | 小红书/抖音 | FABE + Hook | 情绪价值 |
-
-### 🛒 产品推广 / 转化文案
-
-| 场景 | 类型 | 推荐平台 | 核心技巧组合 | 辅助技巧 |
-|------|------|----------|--------------|----------|
-| 小红书种草笔记 | product | 小红书 | 小红书三大公式 + FABE | 7大标题 + 情绪价值 |
-| 公众号产品推广 | product | 公众号 | PAS + FABE | Hook + 前后对比 |
-| 电商详情页 | product | general | FABE + AIDA | 4U标题 |
-| 冷启动邮件 | newsletter | general | PAS + 4U标题 | Hook |
-| 产品发布文案 | product | LinkedIn / X | AIDA + StoryBrand | 黄金圈 |
-
-### 📢 品牌故事 / 内容营销
-
-| 场景 | 类型 | 推荐平台 | 核心技巧组合 | 辅助技巧 |
-|------|------|----------|--------------|----------|
-| 品牌故事 / 创始人IP | storytelling | 公众号 | 英雄之旅 + 叙事弧 | APAG |
-| 客户成功案例 | case-study | general / LinkedIn | 英雄之旅 + FABE | StoryBrand |
-| 品牌宣言 / 使命愿景 | storytelling | 官网/公众号 | StoryBrand + 黄金圈 | 金句公式 |
-| 知乎盐选故事 | storytelling | 知乎 | 英雄之旅 + PSP + 三幕式 | Hook |
-
-### 💼 B2B / 专业内容
-
-| 场景 | 类型 | 推荐平台 | 核心技巧组合 | 辅助技巧 |
-|------|------|----------|--------------|----------|
-| B2B公众号 / SaaS内容 | b2b | 公众号 | Business Casual + SCQA | 数据叙事 |
-| 白皮书 / 行业报告 | whitepaper | general | SCQA + RIDBUR | 5W1H |
-| 技术博客 | b2b | 掘金 / Medium | SCQA + FAB + 5W1H | 代码示例 |
-| LinkedIn职业内容 | b2b | LinkedIn | SCQA + Hook | StoryBrand |
-| 销售提案 | b2b | general | PAS + FABE + 数据叙事 | 前后对比 |
-
-### 💬 社交媒体 / 短内容
-
-| 场景 | 类型 | 推荐平台 | 核心技巧组合 | 辅助技巧 |
-|------|------|----------|--------------|----------|
-| 朋友圈文案 | social | 微信(朋友圈) | Hook + 情绪价值 | 网感写作 |
-| 小红书短笔记 | social | 小红书 | Hook + 4U + 网感写作 | 金句公式 |
-| X(Twitter)推文 | social | X | Hook + SCQA | 4U标题 |
-| 即刻动态 | social | 即刻 | SCQA + 金句 | Hook |
-| 活动预热 | social | 朋友圈/即刻 | Hook + 情绪价值 | FOMO设计 |
-
-### 🎙️ 播客 / 音频内容
-
-| 场景 | 类型 | 推荐平台 | 核心技巧组合 | 辅助技巧 |
-|------|------|----------|--------------|----------|
-| 单人播客 | podcast | 小宇宙/Spotify | 故事弧 + SCQA | Hook |
-| 访谈播客 | podcast | 小宇宙 | StoryBrand + SCQA | 5W1H |
-| 知识类播客 | podcast | 喜马拉雅 | SCQA + 5W1H | 金句公式 |
+6. **结束信号：** 当收集到的信息足够进入下一阶段时，说 `[信息已充足，进入下一阶段]`，然后直接生成该阶段的产出。
 
 ---
 
-## 技巧速查表
+## Phase 1 · 灵感接收
 
-按写作技巧的类型快速查找：
+**目标：** 理解用户想写什么，确定题材，加载对应资源。
 
-### 经典转化框架（英文）
+### 步骤
 
-| 技巧 | 核心用途 | 适用场景 |
-|------|----------|----------|
-| [AIDA](references/arts/aida.md) | 注意-兴趣-欲望-行动 | 销售文案、广告、着陆页 |
-| [PAS](references/arts/pas.md) | 问题-激化-解决 | 痛点营销、冷邮件、广告 |
-| [FAB](references/arts/fab.md) | 特征-优势-利益 | 产品描述、销售话术 |
-| [FABE](references/arts/fabe.md) | 特征-优势-利益-证据 | 高客单价产品、B2B销售 |
-| [BAB](references/arts/before-after.md) | 之前-之后-桥梁 |  transformation类内容 |
-| [4U](references/arts/4u.md) | 有用-紧急-独特-具体 | 标题、短文案 |
-| [PASTOR](references/arts/pastor.md) | 问题-放大-方案-证明-反应 | 长销售页面 |
-| [SLAP](references/arts/slap.md) | 停下-观看-行动-购买 | 社交媒体广告 |
-| [APP](references/arts/app.md) | 认同-承诺-预览 | 内容营销、博客 |
-| [QUEST](references/arts/quest.md) | 资格-理解-教育-刺激-转化 | 合格线索培育 |
-| [PPPP](references/arts/pppp.md) | 画面-承诺-证明-推动 | 故事型销售文案 |
-| [ACCA](references/arts/acca.md) | 认知-理解-确信-行动 | 教育型内容 |
-| [4Cs](references/arts/four-cs.md) | 清晰-简洁-吸引-可信 | 通用文案自检 |
+1. **读取写作原则：** 用 Read 工具加载 `references/harness.md`。这份文件贯穿全程。
 
-### 故事叙事框架
+2. **识别题材：** 根据用户的描述判断属于哪种题材：
+   - 深度长文 → 加载 `references/genres/depth.md`
+   - 科普教程 → 加载 `references/genres/tutorial.md`
+   - 散文 → 加载 `references/genres/essay.md`
+   - 短篇小说 → 加载 `references/genres/short-fiction.md`
+   - 长篇小说 → 加载 `references/genres/novel.md`
+   - 题材不明确？直接问："你想写的更偏向哪种？深度分析、教程、个人随笔、还是虚构故事？"
 
-| 技巧 | 核心用途 | 适用场景 |
-|------|----------|----------|
-| [英雄之旅](references/arts/hero-journey.md) | 经典故事结构 | 品牌故事、创始人IP |
-| [英雄之旅简化版](references/arts/hero-journey-simplified.md) | 12阶段简化 | 短视频脚本、演讲 |
-| [三幕式](references/arts/three-act.md) | 开端-冲突-结局 | 剧本、长故事 |
-| [Freytag金字塔](references/arts/freytag-pyramid.md) | 五阶段戏剧结构 | 小说、戏剧 |
-| [PSP](references/arts/psp.md) | Pixar故事法则 | 动画、品牌故事 |
-| [叙事弧](references/arts/story-arc.md) | 完整故事曲线 | 长文章、演讲 |
-| [STAR](references/arts/star.md) | 情境-任务-行动-结果 | 面试、案例分享 |
-| [StoryBrand](references/arts/storybrand.md) | 品牌故事七部曲 | 品牌定位、营销 |
+3. **启动第一轮提问：** 参考所加载 genre 文件中的"开场提问建议"，选择最适合当前情况的问题。
 
-### 结构化表达框架
+4. **持续提问（1-10轮）：** 每轮围绕以下目标：
+   - 写作动机：为什么想写这个？
+   - 核心观点/故事：最想传达的一个东西是什么？
+   - 目标读者：写给谁看？他们目前对这个话题了解多少？
+   - 素材线索：有没有已有的素材、数据、经历可以用？
+   - 基调定位：希望读起来是什么感觉？轻松？严肃？有故事感？
 
-| 技巧 | 核心用途 | 适用场景 |
-|------|----------|----------|
-| [SCQA](references/arts/scqa.md) | 情境-冲突-问题-答案 | 商务汇报、写作开头 |
-| [SCQA中文应用](references/arts/scqa-chinese.md) | SCQA本土化 | 公众号、知乎 |
-| [5W1H](references/arts/5w1h.md) | 六何分析法 | 新闻报道、教程 |
-| [APAG](references/arts/apag.md) | 痛苦-渴望-答案-收获 | 个人成长、观点文 |
-| [黄金圈](references/arts/golden-circle.md) | WHY-HOW-WHAT | 品牌定位、演讲 |
-
-### 中文社交媒体技巧
-
-| 技巧 | 核心用途 | 适用平台 |
-|------|----------|----------|
-| [小红书三大爆款公式](references/arts/xiaohongshu-3-formulas.md) | 小红书专属结构 | 小红书 |
-| [抖音爆款三段式](references/arts/douyin-3-step.md) | 短视频脚本结构 | 抖音 |
-| [公众号文章结构](references/arts/wechat-article-structure.md) | 公众号排版规范 | 公众号 |
-| [7大爆款标题模板](references/arts/title-7-templates.md) | 标题公式 | 全平台 |
-| [8大开篇模板](references/arts/opening-8-templates.md) | 开头写作 | 公众号、知乎 |
-| [金句写作公式](references/arts/golden-sentence-formulas.md) | 金句创作 | 全平台 |
-| [鱼骨写作法](references/arts/fishbone-writing.md) | 结构化写作 | 深度长文 |
-| [情绪价值写作法](references/arts/emotional-value-writing.md) | 情感共鸣 | 社交媒体 |
-| [网感写作技巧](references/arts/internet-slang-integration.md) | 网络语感 | 社交媒体 |
-
-### B2B / 专业写作
-
-| 技巧 | 核心用途 | 适用场景 |
-|------|----------|----------|
-| [Business Casual](references/arts/business-casual.md) | 专业又轻松 | B2B内容 |
-| [Full-Funnel](references/arts/full-funnel.md) | 全漏斗内容 | B2B营销 |
-| [RIDBUR](references/arts/ridbur.md) | 6步专业框架 | B2B销售文案 |
-| [Hyper-Personalization](references/arts/hyper-personalization.md) | 超个性化 | ABM营销 |
-| [Data-Driven Storytelling](references/arts/data-driven-storytelling.md) | 数据叙事 | 报告、分析 |
-
-### 写作增强技巧
-
-| 技巧 | 核心用途 | 适用场景 |
-|------|----------|----------|
-| [Hook](references/arts/hook.md) | 开头钩子 | 全平台开头 |
-| [Bucket Brigades](references/arts/bucket-brigades.md) | 阅读流畅度 | 长文章 |
-| [AIDA变体](references/arts/aida-variations.md) | AIDA扩展版 | 高级文案 |
-| [So What Test](references/arts/so-what-test.md) | 自检方法 | 内容审核 |
+5. **信息充足时：** 宣布 `[信息已充足，进入 Phase 2 · 大纲生成]`
 
 ---
 
-## 素材处理规则（有素材时生效）
+## Phase 2 · 大纲生成
 
-1. 提取各素材的核心论点、关键数据、典型案例
-2. 以写作主题为轴心进行融合，不做拼贴
-3. 不得连续复制原文超过 15 字
-4. 素材间若有矛盾观点，须主动判断取舍或注明
+**目标：** 基于 Phase 1 收集的信息，生成完整大纲。
+
+### 步骤
+
+1. **查阅写作技巧（按需）：** 如果需要特定的内容结构技巧，先读 `references/techniques-index.md`，找到合适的技巧，再用 Read 工具加载对应的技巧文件。不要一次性加载所有技巧文件。
+
+2. **提问补全（1-10轮）：** 大纲需要的信息可能还有缺口。针对大纲中每个缺信息的节点提问：
+   - "你的第二个论点打算用什么来支撑？有数据还是案例？"
+   - "这个转折点的触发是什么？是一件事、一个发现、还是一个人？"
+   - "你觉得读者在看到这里的时候，心理状态是什么样的？"
+
+3. **生成大纲：** 信息足够后，按照 genre 文件中的大纲模板生成完整大纲。大纲要包含：
+   - 每个章节的标题
+   - 每个章节的核心内容（一两句话说明）
+   - 关键素材的位置标注
+   - `【作者故事位】` 标注（如果适用）
+
+4. **请用户确认：** "这是大纲初稿，看看整体方向对不对？哪里想调整？"
 
 ---
 
-## 文件索引
+## Phase 3 · 细纲确认
 
-```
-writing-article/
-├── SKILL.md                         ← 主控入口（本文件）
-└── references/
-    ├── harnesses.md                 约束规则（最高优先级）
-    ├── rules.md                     内容基本原则
-    ├── categories/
-    │   ├── general.md               通用文章
-    │   ├── social.md                社交媒体内容
-    │   ├── b2b.md                   B2B内容/SaaS内容营销
-    │   ├── product.md               产品推广/种草文案
-    │   ├── storytelling.md          品牌故事/创始人IP
-    │   ├── newsletter.md            邮件通讯/Newsletter
-    │   ├── whitepaper.md            白皮书
-    │   ├── case-study.md            案例研究
-    │   ├── video-script.md          视频脚本
-    │   └── podcast.md               播客脚本
-    ├── platforms/
-    │   ├── general.md               通用（无特定平台）
-    │   ├── wechat.md                微信
-    │   ├── xiaohongshu.md           小红书
-    │   ├── zhihu.md                 知乎
-    │   ├── douyin.md                抖音
-    │   ├── juejin.md                掘金
-    │   ├── medium.md                Medium
-    │   ├── linkedin.md              LinkedIn
-    │   ├── bilibili.md              B站/哔哩哔哩
-    │   ├── x.md                     X/Twitter
-    │   ├── jike.md                  即刻
-    │   └── youtube-shorts.md        YouTube Shorts
-    └── arts/
-        ├── apag.md                          APAG 框架
-        ├── scqa.md                          SCQA 金字塔
-        ├── hook.md                          钩子技法
-        ├── fab.md                           FAB 利益框架
-        ├── fabe.md                          FABE框架（强化版）
-        ├── story-arc.md                     叙事弧
-        ├── pas.md                           PAS框架
-        ├── aida.md                          AIDA模型
-        ├── 4u.md                            4U标题法
-        ├── psp.md                           PSP/Pixar故事法则
-        ├── hero-journey.md                  英雄之旅
-        ├── hero-journey-simplified.md       英雄之旅简化版
-        ├── before-after.md                  前后对比桥
-        ├── pastor.md                        PASTOR框架
-        ├── slap.md                          SLAP框架
-        ├── app.md                           APP框架
-        ├── quest.md                         QUEST框架
-        ├── pppp.md                          4P/PPPP框架
-        ├── star.md                          STAR方法
-        ├── three-act.md                     三幕式结构
-        ├── freytag-pyramid.md               Freytag金字塔
-        ├── so-what-test.md                  So What? Test
-        ├── four-cs.md                       4Cs框架
-        ├── acca.md                          ACCA框架
-        ├── aida-variations.md               AIDA变体
-        ├── bucket-brigades.md               Bucket Brigades
-        ├── 5w1h.md                          5W1H
-        ├── golden-circle.md                 黄金圈法则
-        ├── storybrand.md                    StoryBrand框架
-        ├── xiaohongshu-3-formulas.md        小红书三大爆款公式
-        ├── fishbone-writing.md              鱼骨写作法
-        ├── opening-8-templates.md           8大开篇模板
-        ├── golden-sentence-formulas.md      金句写作公式
-        ├── douyin-3-step.md                 抖音爆款三段式
-        ├── wechat-article-structure.md      公众号文章结构
-        ├── title-7-templates.md             7大爆款标题模板
-        ├── scqa-chinese.md                  SCQA中文应用
-        ├── emotional-value-writing.md       情绪价值写作法
-        ├── internet-slang-integration.md    网感写作技巧
-        ├── business-casual.md               Business Casual
-        ├── full-funnel.md                   Full-Funnel Method
-        ├── ridbur.md                        RIDBUR框架
-        ├── hyper-personalization.md         Hyper-Personalization
-        └── data-driven-storytelling.md      Data-Driven Storytelling
-```
+**目标：** 把大纲展开为每一段的详细规划，锁定写作蓝图。
+
+### 步骤
+
+1. **展开细纲：** 将大纲的每个章节展开为：
+   - 每段的标题或主旨句
+   - 每段的一句话说明（这段要说什么、达到什么效果）
+   - 段落之间的衔接逻辑
+
+2. **提问确认（1-10轮）：** 围绕以下方向：
+   - 论点排序："你觉得先说A再说B，还是反过来更顺？"
+   - 侧重调整："这一节你想花多少笔墨？是重点展开还是快速带过？"
+   - 素材确认："这里标了一个故事位，你有合适的真实经历吗？"
+
+3. **锁定细纲：** 用户确认后，细纲就是写作蓝图。后续写作严格按细纲执行。
+
+---
+
+## Phase 4 · 初稿生成
+
+**目标：** 按细纲逐节展开，写出完整初稿。
+
+### 步骤
+
+1. **写作前准备：**
+   - 确认 `references/harness.md` 的六条原则已加载
+   - 按需查阅技巧文件（通过 `references/techniques-index.md` 索引）
+   - 明确每一节要用的写作手法
+
+2. **逐节展开写作：**
+   - 严格遵守 `harness.md` 的六条写作原则
+   - 按细纲的段落规划逐段展开
+   - 遇到 `【作者故事位】` 保留标注，不代为编造
+   - 需要数据或事实时，如果无法确认，标注"待核实"
+
+3. **初稿完成后，定向提问（1-3轮）：**
+   - "读完初稿，哪里感觉'不对味'？"
+   - "有没有哪段读起来拖沓或者跳跃太快？"
+   - "整体的调子是你想要的吗？"
+
+4. **根据反馈修改：** 用户提出的每一条反馈，逐一修改。改完之后再确认。
+
+---
+
+## Phase 5 · 终稿输出
+
+**目标：** 整合所有反馈，输出最终版本。
+
+### 步骤
+
+1. **最终审核：** 对照 `harness.md` 逐条检查：
+   - [ ] 对话感：朗读测试通过？
+   - [ ] 真实性：没有编造的内容？
+   - [ ] AI 痕迹：句式有变化？没有滥用过渡词？
+   - [ ] 感官描写：场景有画面感？
+   - [ ] 个性化：读起来像真人写的？
+   - [ ] 故事位：所有 `【作者故事位】` 都有标注？
+
+2. **输出终稿：** 直接输出正文。
+
+3. **文末标注：**
+   ```
+   [终稿 · 约XXX字 · 题材：XXX]
+   ```
+
+---
+
+## 资源懒加载规则
+
+不要一开始就把所有文件读进来。按需加载，节省上下文空间。
+
+| 时机 | 读取什么 |
+|------|---------|
+| Phase 1 开始 | `references/harness.md` + 对应的 `references/genres/{题材}.md` |
+| 需要写作技巧时 | 先读 `references/techniques-index.md`（索引），再按需读具体技巧文件 |
+| 用户切换题材时 | 重新读取对应的 genre 文件 |
+| Phase 4 开始 | 确认 harness.md 已在上下文中，否则重新加载 |
+
+**关键：** `references/techniques/` 目录下的文件只在需要时按索引查阅，不要批量加载。
+
+---
+
+## 题材识别关键词
+
+帮助快速判断用户想写什么类型的内容：
+
+| 关键词 | 题材 |
+|--------|------|
+| 深度分析、趋势、观点、行业、长文 | depth（深度长文） |
+| 教程、怎么做、科普、指南、入门、学习 | tutorial（科普教程） |
+| 随笔、感想、散文、生活、回忆、感悟 | essay（散文） |
+| 小说、故事、虚构、人物、情节 | short-fiction（短篇小说） |
+| 长篇、系列、连载、世界观、章节 | novel（长篇小说） |
+| 博客、Newsletter、文章（泛指） | 根据内容进一步判断，默认 depth |
