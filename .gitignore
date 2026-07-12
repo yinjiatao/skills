@@ -1,0 +1,31 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Editors
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Local environments and dependencies
+.env
+.env.*
+!.env.example
+node_modules/
+__pycache__/
+*.py[cod]
+
+# Build, coverage, and logs
+build/
+dist/
+coverage/
+*.log
